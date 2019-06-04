@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import Person from "./Person/Person";
+import Persons from "../Components/Persons/Persons";
 
 class App extends Component {
   //se hereda de Component.
@@ -27,7 +27,6 @@ class App extends Component {
 
     const oPersons = [...this.state.persons];
     oPersons[personIndex] = selectedPerson;
-
 
     this.setState({ persons: oPersons });
   };
@@ -57,30 +56,18 @@ class App extends Component {
     if (this.state.showPersons) {
       personsDiv = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <Person
-                click={() => this.deletePersonHandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                changed={event => this.nameChangedHandler(event, person.id)}
-              />
-            );
-          })}
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler}
+          />
         </div>
       );
     }
 
     return (
       <div className="App">
-        <h1> Hi, I'm a React App</h1>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-
-        <button style={estilo} onClick={this.togglePersonHandler}>
-          {" "}
-          Toggle Persons
-        </button>
+        
 
         {personsDiv}
       </div>
