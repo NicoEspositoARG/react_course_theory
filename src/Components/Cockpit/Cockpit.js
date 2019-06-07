@@ -1,26 +1,27 @@
-import React from 'react';
+import React from "react";
+import classes from "./Cockpit.css";
 
-const cockpit = (props) => {
-    const assignedClasses = [];
-    
-    if ( props.persons.lenght <= 2 ) {
-        assignedClasses.push ( classes.red); 
-    }
-    if (props.persons.lenght <= 1 ) {
-        assignedClasses.push( classes.bold );
-    }
+const cockpit = props => {
+  const assignedClasses = [];
 
-    return (
-        <div>
-        <h1> Hi, I'm a React App</h1>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+  if (props.persons.lenght <= 2) {
+    assignedClasses.push(classes.red);
+  }
+  if (props.persons.lenght <= 1) {
+    assignedClasses.push(classes.bold);
+  }
 
-        <button style={estilo} onClick={this.togglePersonHandler}>
-          {" "}
-          Toggle Persons
-        </button>
-        </div>
-    );
+  return (
+    <div className={classes.Cockpit}>
+      <h1> Hi, I'm a React App</h1>
+      <p className={assignedClasses.join("")}>
+        {" "}
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+      </p>
+
+      <button  onClick={props.clicked}  > Toggle Persons</button>
+    </div>
+  );
 };
 
 export default cockpit;

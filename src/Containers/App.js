@@ -1,13 +1,17 @@
 import React, { Component } from "react";
-import "./App.css";
+import classes from "./App.css";
 import Persons from "../Components/Persons/Persons";
+import Cockpit from "../Components/Cockpit/Cockpit"
+
 
 class App extends Component {
-  //se hereda de Component.
-  // cuando se modifica state, se dispara un re render.
+  constructor(props) {
+    super(props);
+    console.log("[App.js] constructor")
+  }
+
   state = {
     persons: [
-      //array of objects
       { id: "a1", name: "Max", age: 28 },
       { id: "a2", name: "Manu", age: 22 },
       { id: "a3", name: "Steph", age: 23 }
@@ -15,6 +19,13 @@ class App extends Component {
     otherState: "some other value",
     showPersons: false
   };
+
+
+static getDerivedStateFromProps(props, state){
+  console.log("[App.js] getDerivedStateFromProps", props)
+  return props
+
+}
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -42,33 +53,34 @@ class App extends Component {
     this.setState({ persons: persons });
   };
 
+  componentDidMount(){
+  console.log("[App.js] Component did mount..");
+
+  }
   render() {
-    const estilo = {
-      backgroundColor: "white",
-      font: "inherit",
-      border: "1x solid blue",
-      padding: "8px",
-      cursor: "pointer"
-    };
+    console.log("[App.js] Render")
+
 
     let personsDiv = null;
 
     if (this.state.showPersons) {
       personsDiv = (
-        <div>
           <Persons
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
             changed={this.nameChangedHandler}
           />
-        </div>
       );
     }
 
     return (
-      <div className="App">
-        
-
+      <div className={classes.App}>
+        {/* <h1 className={classes.sarasa}>holaaaaaaaaa</h1> */}
+        <Cockpit
+         showPersons= {this.state.showPersons}
+         persons={this.state.persons}
+         clicked={this.togglePersonHandler}
+         />
         {personsDiv}
       </div>
     );
